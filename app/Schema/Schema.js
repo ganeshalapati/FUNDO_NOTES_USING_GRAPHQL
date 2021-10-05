@@ -18,6 +18,10 @@ module.exports = buildSchema(`
            token: String!
            tokenExpiration: Int!
        }
+       type forgetReturn
+       {
+           email:String
+       }
         
        input EventInput {
            _id:ID!
@@ -30,6 +34,9 @@ module.exports = buildSchema(`
             email:String!
             password:String!
         }
+        input ForgotPass{
+            email:String!
+        }
       
    type RootQuery{
        events : [Event!]!
@@ -38,6 +45,7 @@ module.exports = buildSchema(`
     type RootMutation {
        createUser(eventInput: EventInput): Event
        loginuser(userInput :UserInput): User
+       forgotpassword(forgotInput :ForgotPass): forgetReturn
   
     }
        schema{

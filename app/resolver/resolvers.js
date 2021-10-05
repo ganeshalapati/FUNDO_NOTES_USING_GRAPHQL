@@ -1,11 +1,10 @@
 const Event = require('../../models/models')
 const User = require('../../models/user')
- const bcrypt =require('bcryptjs')
+
+ const bcrypt =require('../../utilities/bcrypt')
  const jwt = require('jsonwebtoken')
 
 const userResolver ={
-
-    
     events:()=>{
      return Event.find()
      .then(events=>{
@@ -77,5 +76,32 @@ const userResolver ={
      return{ userId: user.id,token:token,tokenExpiration:1 }
     }
 }
+   forgotpassword :async args=>{
+    const user = new User({email :args.forgotInput.email,password :args.forgotInput.password});
+    return user
+     
+    .then(result =>{
+        console.log(result)
+        return{...result._doc}
+    })
+    .catch(err=>{
+        console.log(err)
+        return err;
+    })
+}
+forgotpassword :async args=>{
+    const user = new User({email :args.forgotInput.email,password :args.forgotInput.password});
+    return user
+     
+    .then(result =>{
+        console.log(result)
+        return{...result._doc}
+    })
+    .catch(err=>{
+        console.log(err)
+        return err;
+    })
+}
+
 
 module.exports = userResolver; 
