@@ -35,4 +35,4 @@ class joiValidation {
         });
 
 }
-module.exports = new joiValidation();
+module.exports = new joiValidation()
