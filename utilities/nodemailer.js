@@ -16,7 +16,7 @@ class sendbymail {
       let mailOptions = {
         from:'alapatiganesh31@gmail.com',
         to: 'alapatiganesh0@gmail.com' ,
-        subject: 'Fundoo notes Password / resetpass testing',
+        subject: 'Fundoo notes resetpassword testing',
         text: code
       };
 

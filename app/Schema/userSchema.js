@@ -26,11 +26,7 @@ type Reset{
     message:String
     newpassword:String
 }
-type Post{
-    id:ID
-    title:String
-    description:String
-}
+
  
 input userInput{
     firstName:String
@@ -50,21 +46,17 @@ input resetPassword{
     Code:String
     newpassword:String
 }
-input postInput{
-    title:String
-    description:String
-}
- 
+
 type Query {
     users:[Users]
-    getAllnotes:[Post]
+    
 }
 type Mutation{
     createuser(path:userInput):Users
     loginuser(path:loginUser):Authuser
     forgotpassword(path:forgotPassword):Forgot
     resetpassword(path:resetPassword):Reset
-    createnote(post:postInput):Post
+    
 } 
 `
 module.exports = typeDefs;

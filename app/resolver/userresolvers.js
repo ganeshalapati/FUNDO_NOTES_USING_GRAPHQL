@@ -7,30 +7,17 @@ const  bcryptpass = require('../../utilities/bcrypt')
 const bcrtpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendbymail = require('../../utilities/nodemailer')
-const Note  = require('../../models/model.note')
 
 const resolvers={
-
-    //in Query we can get all data present in database
-
     Query:{
          
         users: async ()=>{
              return await userModel.find()
 
         }
-        ,       
-        getAllnotes: async ()=>{
-         return await Post.find()
-      }   
     },
-
-    //in Mutation we update and delete and insert data
-
     Mutation:{
-
         // creating new user
-
         createuser:async (_,{path})=>{
           const user = new userModel({
               firstName:path.firstName,
@@ -38,19 +25,16 @@ const resolvers={
               email:path.email,
               password:path.password
             })
-
             // implmentig regex pattern for input data
-
              const Validation = joiValidation.authRegister.validate(user._doc);
              if(Validation.error){
                  return new Apollerror.ValidationError(Validation.error)
              }
-
              //checking email should unique for creating new user
 
             const existinguser = await userModel.findOne({ email:path.email})
             if(existinguser){
-                 return new Apollerror.UserInputError("Email exist already")
+                 return new Apollerror.UserInputError("Email already exists")
             }
 
             // using bcrypt for sequre password to be saved in database and using salt 
@@ -58,15 +42,12 @@ const resolvers={
             bcryptpass.hash(path.password, (error,data)=>{
                 if(data){
                     user.password = data
-                    //console.log(data)
                 }else{
                     throw error;
                 }
                 user.save();
             })
             return user;
- 
-
         },
 
       // login user
@@ -82,13 +63,13 @@ const resolvers={
             }
             const userPresent = await userModel.findOne({ email: path.email });
             if (!userPresent) {
-              return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id .....');
+              return new Apollerror.AuthenticationError('Invalid Email');
             }
 
             //checking the password user password and saved password in DB
             const correct = await  bcrtpt.compare(path.password, userPresent.password);
             if (! correct) {
-              return new Apollerror.AuthenticationError('wrong password' );
+              return new Apollerror.AuthenticationError('Incorrect password' );
             }
 
             // Token generating
@@ -110,7 +91,7 @@ const resolvers={
 
              const checkinguser = await userModel.findOne({email:path.email});
              if(!checkinguser){
-                 return new Apollerror.AuthenticationError('user not found .... ')
+                 return new Apollerror.AuthenticationError('user not found ')
              }
 
              sendbymail.getMailMessage(checkinguser.email,(data)=>{
@@ -145,20 +126,13 @@ const resolvers={
             return({
                 email:path.email,
                 newpassword:path.newpassword,
-                message:' your new password is created'
+                message:' password changed succesfully'
             })
          },
 
-         createnote: async(_,{post})=>{
-            const notes = new Note({
-                title: post.title,
-                description: post.description,
-            })
-            await notes.save();
-            return notes
 
          }
          
     }
-}
+
 module.exports =resolvers
