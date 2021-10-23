@@ -37,12 +37,3 @@ class sendbymail {
     }
   });
 }
-passcode =(data)=>{
-if(data == code){
-  console.log("correct code");
-  return "true"
-}else{
-  console.log("wrong code")
-  return "false"
-}}}
-module.exports = new sendbymail()
