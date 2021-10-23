@@ -1,21 +1,23 @@
 const nodemailer = require('nodemailer');
+const { callbackPromise } = require('nodemailer/lib/shared');
+const usermodel = require('../models/usermodel');
 
  var code = null
 class sendbymail {
-  getMailMessage = () => {
+  getMailMessage = (receiver,callbackPromise) => {
  
       code = Math.random().toString(21).substring(3, 17)  
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user:  'alapatiganesh31@gmail.com',
-          pass: 'Ganeshalapati@1999 ',
+          user:  process.env.USER_MAIL,
+          pass: process.env.USER_PASSWORD,
         },  
 
       });
       let mailOptions = {
-        from:'alapatiganesh31@gmail.com',
-        to: 'alapatiganesh0@gmail.com' ,
+        from:process.env.USER_MAIL,
+        to: receiver,
         subject: 'Fundoo notes resetpassword testing',
         text: code
       };
@@ -25,15 +27,22 @@ class sendbymail {
       console.log("Error " + error);     
     } else {
       console.log("Email sent successfully");
+      const checkinguser =  usermodel.findOne({email: receiver});
+      const mailmodel = new mailmodel({
+        mail: checkinguser.email,
+        tempcode: code
+      })
+       mailmodel.save();
+      return callbackPromise(null, "email sent")
     }
   });
 }
 passcode =(data)=>{
 if(data == code){
-  console.log("correct-code");
+  console.log("correct code");
   return "true"
 }else{
-  console.log("wrong-wrong")
+  console.log("wrong code")
   return "false"
 }}}
 module.exports = new sendbymail()

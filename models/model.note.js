@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
-const NostSchema = new mongoose.Schema({
+const NoteSchema = new mongoose.Schema({
+    userId:{
+        type:'string'
+    },
+    email:{
+      type:'string',
+    },
     title:{
         type: 'string',
         required: true,
@@ -8,5 +14,5 @@ const NostSchema = new mongoose.Schema({
         type: 'string',
     }
 })
-const Post = mongoose.model('Notes',NostSchema)
+const Post = mongoose.model('Notes',NoteSchema)
 module.exports = Post;

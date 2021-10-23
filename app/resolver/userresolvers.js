@@ -85,7 +85,7 @@ const resolvers={
                   }
         },
 
-        // implementing Forgot password
+        // Forgot password
 
          forgotpassword: async(_,{path})=>{
 
@@ -98,41 +98,49 @@ const resolvers={
                  if(!data){
                      return new Apollerror.ApolloError('otp sending is failed')
                  }
+                 
              })
             return ({
                 email:path.email,
+               
             })
          },
-
-        // Reseting the password 
         
-        resetpassword: async(_,{path})=>{
-            const checkinguser = await userModel.findOne({ email:path.email})
-            if(!checkinguser){
-                return new Apollerror.AuthenticationError('user id does not exist')
+        // Resetpassword
+        
+       // Reseting the password 
+        
+       resetpassword: async(_,{path})=>{
+        const checkinguser = await userModel.findOne({ email:path.email})
+        if(!checkinguser){
+            return new Apollerror.AuthenticationError('user id does not exist')
+        }
+        
+        const checkingcode = sendbymail.passcode(path.Code)
+        if(checkingcode  == 'false'){
+            return new Apollerror.AuthenticationError('wrong code enter valid code')
+        }
+        if(checkingcode == 'expired'){
+            return new ApolloError.AuthenticationError('code expired')
+        }
+        
+        bcryptpass.hash(path.newpassword,(error,data)=>{
+            if(data){
+                checkinguser.password=data;
+                checkinguser.save();
+            }else{
+                return 'error'
             }
-            const checkingcode = sendbymail.passcode(path.Code)
-            if(checkingcode === 'false'){
-                return new Apollerror.AuthenticationError('wrong code enter valid code')
-            }
-            bcryptpass.hash(path.newpassword,(error,data)=>{
-                if(data){
-                    checkinguser.password=data;
-                    checkinguser.save();
-                }else{
-                    return 'error'
-                }
-            })
-            return({
-                email:path.email,
-                newpassword:path.newpassword,
-                message:' password changed succesfully'
-            })
-         },
-
-
-         }
+        })
+        return({
+            email:path.email,
+            newpassword:path.newpassword,
+            message:' your new password is created',
+        })
+     },
          
-    }
-
+             
+},
+        }
+    
 module.exports =resolvers
