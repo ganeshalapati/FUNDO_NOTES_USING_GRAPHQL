@@ -28,17 +28,25 @@ type Reset{
     newpassword:String
 }
 type Post{
-    id :ID
-    userId:ID
     title:String
     description:String
 }
+type Label{
+    labelname:String
+}
+ 
 input userInput{
     firstName:String
     lastName:String
     email:String
     password:String
 } 
+type GetLabels{
+    _id:ID
+    userId:String
+    noteId:[String]
+    labelName:String
+}
 input loginUser{
     email:String
     password:String
@@ -52,15 +60,23 @@ input resetPassword{
     newpassword:String
 }
 input postInput{
-    userId:ID
     title:String
     description:String
 }
-
+input LabelInput{
+    noteID:ID
+    labelname:String
+}
+input deleteLabel{
+    noteID:ID
+    labelname:String
+}
+ 
 type Query {
     users:[Users]
     getAllnotes:[Post]
     getnotes(id:ID):Post
+    getLabel:[GetLabels]
 }
 type Mutation{
     createuser(path:userInput):Users
@@ -71,6 +87,8 @@ type Mutation{
     createnote(post:postInput):Post
     deletenote(id:ID):String
     editnote(id:ID,post:postInput):Post
+    createLabel(path:LabelInput):Label
+    deleteLabel(path :deleteLabel ):Label
 } 
 `
 module.exports = typeDefs;

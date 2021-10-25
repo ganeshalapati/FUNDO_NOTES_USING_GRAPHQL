@@ -20,7 +20,7 @@ const notereslovers={
                 userId: post.userId,
                 title: post.title,
                 description: post.description,
-                email: post.email,
+                
             })
             const existingUser = await userModel.findOne({ email: post.email });
             if(existingUser){
@@ -30,8 +30,6 @@ const notereslovers={
             return notes
  
          },
-
-         // Editing Notes By Id 
 
          editnote: async(parent,args,context,info)=>{
 
@@ -43,8 +41,6 @@ const notereslovers={
 
             return note
          },
-
-         // Deleting Notes by ID  
 
         deletenote: async(parent,args,context,info)=>{
 
