@@ -50,7 +50,7 @@ const labelModel = require('../../models/lable.model')
                 await labelModel.findByIdAndDelete(checkLabel.id);
             }
 
-            return 'your label is deleted successfully'
+            return ' label is deleted successfully'
         }
     }
 
