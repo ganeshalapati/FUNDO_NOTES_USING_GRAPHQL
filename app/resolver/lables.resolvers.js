@@ -39,7 +39,7 @@ const labelModel = require('../../models/lable.model')
                 labelName: path.labelName
             })
         },
-        deleteLabel:async({path})=>{
+        deleteLabel:async({path},)=>{
              
             const checkLabel = await labelModel.findOne({ labelName: path.labelname });
             if (!checkLabel) {
@@ -51,8 +51,25 @@ const labelModel = require('../../models/lable.model')
             }
 
             return ' label is deleted successfully'
+        },
+        editLabel:async (_,{path},context) =>{
+
+        const checkNote = await labelModel.findOne({ noteId: path.noteID });
+            if (checkNote) {
+                await labelModel.findByIdAndUpdate(checkLabel.id);
+            }
+            return ({
+            newlabelname:path.newlabelname
+            
+            })
+               
         }
-    }
+
+
+       
+    }   
+
+    
 
  }
  module.exports = labelresolvers;

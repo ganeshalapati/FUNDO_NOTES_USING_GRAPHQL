@@ -32,7 +32,7 @@ type Post{
     description:String
 }
 type Label{
-    labelname:String
+    newlabelname:String
 }
  
 input userInput{
@@ -65,8 +65,14 @@ input postInput{
 }
 input LabelInput{
     noteID:ID
-    labelname:String
+    newlabelname:String
 }
+input editLabel
+    {
+        noteID:ID
+        labelName:String
+        newLabelName:String
+    }
 input deleteLabel{
     noteID:ID
     labelname:String
@@ -89,6 +95,7 @@ type Mutation{
     editnote(id:ID,post:postInput):Post
     createLabel(path:LabelInput):Label
     deleteLabel(path :deleteLabel ):Label
+    editLabel(path :LabelInput):Label
 } 
 `
 module.exports = typeDefs;
