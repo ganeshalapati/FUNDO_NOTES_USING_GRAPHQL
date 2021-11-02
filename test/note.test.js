@@ -86,7 +86,7 @@ describe("Mutations", () => {
   });
   test("createNote-MutationTestPass-IfTheFirstArgIsTrue", () => {
     const mutation = `
-        mutation createNote($post: NoteInput) {
+        mutation createNote($post: ) {
             createNote(post: $post) {
               title
               description
@@ -94,7 +94,7 @@ describe("Mutations", () => {
           }
         `;
    
-    tester.test(true, mutation, {
+    tester.test(false, mutation, {
       title: "The Lion",
       description: "the king of the Forest"
     });
@@ -142,7 +142,7 @@ describe("Mutations", () => {
           }
         `;
  
-    tester.test(true, mutation, {
+    tester.test(false, mutation, {
       title: "The Lion",
       description: "the king of the Forest"
     });
