@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const { callbackPromise } = require('nodemailer/lib/shared');
 const usermodel = require('../models/usermodel');
+const mailmodel = require('../models/mailmodel');
+
 
  var code = null
 class sendbymail {
@@ -32,7 +34,7 @@ class sendbymail {
         mail: checkinguser.email,
         tempcode: code
       })
-       mailmodel.save();
+         mailmodel.save();
       return callbackPromise(null, "email sent")
     }
   });

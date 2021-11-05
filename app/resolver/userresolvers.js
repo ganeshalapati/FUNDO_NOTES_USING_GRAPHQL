@@ -93,7 +93,10 @@ const resolvers={
              if(!checkinguser){
                  return new Apollerror.AuthenticationError('user not found ')
              }
-
+             const check = await mailmodel.find({ mail: path.email })
+             if (check.length != 0) {
+                 return new ApolloError.UserInputError('Mail code already sent');
+             }
              sendbymail.getMailMessage(checkinguser.email,(data)=>{
                  if(!data){
                      return new Apollerror.ApolloError('otp sending is failed')

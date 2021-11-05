@@ -17,10 +17,10 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5
-    }
-},
+}},
+   
     {
-        timestamps: true
-    })
+        timestamps: true,
+})
 
  module.exports = mongoose.model('UserData',PostSchema)
