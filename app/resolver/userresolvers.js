@@ -7,6 +7,8 @@ const  bcryptpass = require('../../utilities/bcrypt')
 const bcrtpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendbymail = require('../../utilities/nodemailer')
+const mailModel = require('../../models/mailmodel');
+
 
 const resolvers={
     Query:{
@@ -93,7 +95,7 @@ const resolvers={
              if(!checkinguser){
                  return new Apollerror.AuthenticationError('user not found ')
              }
-             const check = await mailmodel.find({ mail: path.email })
+             const check = await mailModel.find({ mail: path.email })
              if (check.length != 0) {
                  return new ApolloError.UserInputError('Mail code already sent');
              }

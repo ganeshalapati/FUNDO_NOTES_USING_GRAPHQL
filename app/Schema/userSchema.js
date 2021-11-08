@@ -32,7 +32,7 @@ type Post{
     description:String
 }
 type Label{
-    newlabelname:String
+    labelname:String
 }
  
 input userInput{
@@ -65,7 +65,7 @@ input postInput{
 }
 input LabelInput{
     noteID:ID
-    newlabelname:String
+    labelname:String
 }
 input editLabel
     {
