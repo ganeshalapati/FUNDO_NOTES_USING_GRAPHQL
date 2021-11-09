@@ -36,11 +36,7 @@ describe("Query", () => {
                     }]
             }
         }
-        // //tester.setFixture(fixture);
-        // const result = tester.mock({ query });
-        // expect(result.data.getLabel[0].labelName).toBe("notes");
-        // expect(result.data.getLabel[0].noteId[0]).toBe("61760ba4188de34129479323",
-        //     "61760ba4188de34129479323");
+        
     });
 });
 describe("Mutations", () => {
@@ -89,8 +85,7 @@ describe("Mutations", () => {
         // First arg: true because the mutation is valid
         // Second arg: mutation to test
         // Third argument is the input of the mutation
-        // tester.test(true, mutation, {
-        //     createLabel: "New Label Created Sucessfully"
+        
         
     });
 })

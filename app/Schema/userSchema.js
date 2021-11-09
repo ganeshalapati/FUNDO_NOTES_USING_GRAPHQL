@@ -95,7 +95,7 @@ type Mutation{
     editnote(id:ID,post:postInput):Post
     createLabel(path:LabelInput):Label
     deleteLabel(path :deleteLabel ):Label
-    editLabel(path :LabelInput):Label
+    editLabel(path :editLabel):Label
 } 
 `
 module.exports = typeDefs;

@@ -52,16 +52,16 @@ const labelModel = require('../../models/lable.model')
 
             return ' label is deleted successfully'
         },
-    //    // editLabel:async (_,{path},context) =>{
+       editLabel:async (_,{path},context) =>{
 
-    //     const checkNote = await labelModel.findOne({ noteId: path.noteID });
-    //         if (checkNote) {
-    //             await labelModel.findByIdAndUpdate(checkLabel.id);
-    //         }
-    //         return ({
-    //         newlabelname:path.newlabelname
+        const checkNote = await labelModel.findOne({ noteId: path.noteID });
+            if (checkNote) {
+                await labelModel.findByIdAndUpdate(checkLabel.id);
+            }
+            return ({
+            newlabelname:path.newlabelname
             
-    //         //})
+            })
                
         }
 
@@ -69,7 +69,7 @@ const labelModel = require('../../models/lable.model')
        
     
 
-    
+    }
 
  }
  module.exports = labelresolvers;
