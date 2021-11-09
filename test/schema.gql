@@ -24,6 +24,11 @@ type User{
         mailcode:String!
         newpassword:String!
     }
+    input LabelInput
+    {
+        noteID:ID!
+        labelname:String!
+    }
     type forgotReturn
     {
         email:String
@@ -50,6 +55,10 @@ type User{
        title:String!
        description:String!
     }
+    type Label{
+    labelname:String!
+}
+ 
     input NoteEdit
     {   noteId:String!
         title:String
@@ -74,7 +83,8 @@ type User{
         createNote( input:NoteInput):Note
         editNote(input:NoteEdit):Note
         deleteNote(input:DeleteNote):Note
-         
+       
+
        
         createUser( input:UserInput):User
         forgotpassword( input:ForgotPass):forgotReturn
