@@ -94,7 +94,7 @@ type Mutation{
     deletenote(id:ID):String
     editnote(id:ID,post:postInput):Post
     createLabel(path:LabelInput):Label
-    deleteLabel(path :deleteLabel ):Label
+    deleteLabel(id:ID):Label
     editLabel(path :editLabel):Label
 } 
 `

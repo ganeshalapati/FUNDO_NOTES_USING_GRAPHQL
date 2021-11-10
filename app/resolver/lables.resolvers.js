@@ -37,18 +37,14 @@ const labelModel = require('../../models/lable.model')
                 labelName: path.labelName
             })
         },
-        deleteLabel:async({path},)=>{
-             
-            const checkLabel = await labelModel.findOne({ labelName: path.labelname });
-            if (!checkLabel) {
-                return new Apolloerror.UserInputError('Label is not present');
-            }
-            const checkNote = await labelModel.findOne({ noteId: path.noteID });
-            if (!checkNote) {
-                await labelModel.findByIdAndDelete(checkLabel.id);
-            }
+        deleteLabel: async(_,args)=>{
 
-            return ' label is deleted successfully'
+            const { id } = args
+    
+            await labelModel.findByIdAndDelete(id)
+    
+            return 'Label deleted successfully'
+ 
         },
        editLabel:async (_,{path},context) =>{
 
