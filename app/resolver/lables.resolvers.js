@@ -46,18 +46,32 @@ const labelModel = require('../../models/lable.model')
             return 'Label deleted successfully'
  
         },
-       editLabel:async (_,{path},context) =>{
+        editLabel: async(_,args)=>{
 
-        const checkNote = await labelModel.findOne({ noteId: path.noteID });
-            if (checkNote) {
-                await labelModel.findByIdAndUpdate(checkLabel.id);
-            }
-            return ({
-            newlabelname:path.newlabelname
+            const {id} =args
+
+           const {labelname} =args.path
+
+           const label = await labelModel.findByIdAndUpdate(id,{labelname},{new :true})
+
+           return label
             
-            })
                
-        }
+        },
+        // AddLabel:async(_,{path},context)=>{
+        //     const checkNote = await labelModel.findOne({noteId: path.noteID})
+        //     if(!checkNote){
+        //         return new Apolloerror.UserInputError('note is not exist ')}
+        //     const checkinglabel = await labelModel.findOne({labelName:path.labelname})
+        //     if(checkinglabel){
+        //         checkinglabel.noteId.push(path.noteID)
+        //         await checkinglabel.save();
+        //         return({
+        //             labelname:path.labelname,
+               // })
+           // }
+
+        //}
 
 
        
