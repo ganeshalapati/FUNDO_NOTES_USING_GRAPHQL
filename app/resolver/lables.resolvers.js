@@ -26,7 +26,6 @@ const labelModel = require('../../models/lable.model')
             const labelmodel = new labelModel({
 
                 noteId: path.noteID,
-
                 labelName:path.labelname,
                 
             });

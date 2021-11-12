@@ -52,31 +52,29 @@ const notereslovers={
         return 'notes is deleted sucessfully'
 
         },
-           AddLabel: async (parent,args,context) => {
-            const {id} =args
-            const {_id} = context
-            let userNote = await Note.findById(id.noteId);
-            console.log(userNote);
+           AddLabel: async (_,{path},context) =>{
+            const checkinglabel = await labelModel.findOne({labelName:path.labelname})
+            if(checkinglabel){
+                checkinglabel.noteId.push(path.noteID)
+                await checkinglabel.save();
+                return({
+                    labelname:path.labelname,
+                })
+            }
+            const labelmodel = new labelModel({
 
-            let userLabel = await labelModel.findById(_id);
-            console.log(userLabel);
-            if (userNote.id != userLabel._id) {
-                throw new Error('No such label found.');
-            }
-            if (userLabel) {
-                let putlabel = await userNote.updateOne({ label: userLabel });
-                if (putlabel) {
-                    return {
-                        message: 'Label has been added to your note.',
-                        success: true
-                    };
-                } else {
-                    return {
-                        message: 'Note id not found. Unable to put label.',
-                        success: false
-                    };
-                }
-            }
+                noteId: path.noteID,
+                labelName:path.labelname,
+                
+            });
+            await labelmodel.save();
+            return "label added to note sucessfully"
+                
+            
+        
+                    
+                
+            
         }
         
     }

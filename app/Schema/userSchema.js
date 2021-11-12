@@ -101,7 +101,7 @@ type Mutation{
     createLabel(path:LabelInput):Label
     deleteLabel(id:ID):Label
     editLabel(path :editLabel):Label
-    AddLabel(post:addLabelInput):String
+    AddLabel(path:LabelInput):String
 } 
 `
 module.exports = typeDefs;
