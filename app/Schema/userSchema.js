@@ -41,6 +41,7 @@ input userInput{
     email:String
     password:String
 } 
+
 type GetLabels{
     _id:ID
     userId:String
@@ -66,6 +67,10 @@ input postInput{
 input LabelInput{
     noteID:ID
     labelname:String
+}
+input addLabelInput{
+    noteID:ID
+    labelID:ID
 }
 input editLabel
     {
@@ -96,6 +101,7 @@ type Mutation{
     createLabel(path:LabelInput):Label
     deleteLabel(id:ID):Label
     editLabel(path :editLabel):Label
+    AddLabel(post:addLabelInput):String
 } 
 `
 module.exports = typeDefs;

@@ -1,6 +1,7 @@
 const Note  =  require('../../models/model.note')
 
 const userModel = require('../../models/usermodel')
+const labelModel = require('../../models/lable.model')
 
 const notereslovers={
 
@@ -50,6 +51,32 @@ const notereslovers={
 
         return 'notes is deleted sucessfully'
 
+        },
+           AddLabel: async (parent,args,context) => {
+            const {id} =args
+            const {_id} = context
+            let userNote = await Note.findById(id.noteId);
+            console.log(userNote);
+
+            let userLabel = await labelModel.findById(_id);
+            console.log(userLabel);
+            if (userNote.id != userLabel._id) {
+                throw new Error('No such label found.');
+            }
+            if (userLabel) {
+                let putlabel = await userNote.updateOne({ label: userLabel });
+                if (putlabel) {
+                    return {
+                        message: 'Label has been added to your note.',
+                        success: true
+                    };
+                } else {
+                    return {
+                        message: 'Note id not found. Unable to put label.',
+                        success: false
+                    };
+                }
+            }
         }
         
     }

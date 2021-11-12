@@ -3,6 +3,10 @@ const NoteSchema = new mongoose.Schema({
     userId:{
         type:'string'
     },
+    Label: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Label'
+    },
     email:{
       type:'string',
     },

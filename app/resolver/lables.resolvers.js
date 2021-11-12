@@ -66,12 +66,11 @@ const labelModel = require('../../models/lable.model')
         //     if(checkinglabel){
         //         checkinglabel.noteId.push(path.noteID)
         //         await checkinglabel.save();
-        //         return({
-        //             labelname:path.labelname,
-               // })
-           // }
-
-        //}
+        //         return 'note added succesfully'
+                    
+               
+           
+        
 
 
        
