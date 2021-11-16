@@ -8,7 +8,7 @@ const labelSchema = mongoose.Schema({
     noteId: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'noteModel'
+            ref: 'model.note'
         }]
     },
 
@@ -21,5 +21,4 @@ const labelSchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('labelModel', labelSchema);
-
+module.exports = mongoose.model('Label', labelSchema);

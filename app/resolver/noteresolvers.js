@@ -53,26 +53,24 @@ const notereslovers={
 
         },
            AddLabel: async (_,{path},context) =>{
-            const checkinglabel = await labelModel.findOne({labelName:path.labelname})
-            if(checkinglabel){
-                checkinglabel.noteId.push(path.noteID)
-                await checkinglabel.save();
-                return({
-                    labelname:path.labelname,
-                })
+            let userNote = await notesModel.findById({ _id: path.noteId });
+            let userLabel = await labelsModel.findById({ _id: path.labelId });
+            if (userNote.userId != userLabel.userId) {
+                throw new Error('No such label found.');
             }
-            const labelmodel = new labelModel({
-
-                noteId: path.noteID,
-                labelName:path.labelname,
-                
-            });
-            await labelmodel.save();
-            return "label added to note sucessfully"
-                
-            
+            if (userLabel) {
+                let putlabel = await userNote.updateOne({ label: userLabel });
+                if (putlabel) {
+                    return {
+                        message: 'Label has been added to your note.',
+                        success: true
+                    };
+                } else {
+                    return {
+                        message: 'Note id not found. Unable to put label.',
+                        success: false
         
-                    
+               }   }   }   
                 
             
         }

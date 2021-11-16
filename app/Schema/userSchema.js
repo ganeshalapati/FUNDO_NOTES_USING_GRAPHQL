@@ -82,7 +82,13 @@ input deleteLabel{
     noteID:ID
     labelname:String
 }
- 
+type Label {
+    id: ID!
+    labelName: String!
+    userId: String!
+}
+
+
 type Query {
     users:[Users]
     getAllnotes:[Post]
