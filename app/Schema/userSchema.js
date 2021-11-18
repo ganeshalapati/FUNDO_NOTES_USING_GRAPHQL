@@ -109,7 +109,7 @@ type Mutation{
     deleteLabel(id:ID):Label
     editLabel(path :editLabel):Label
 
-    saveLabelToNote(noteID: ID, label_ID: ID): String
+    addLabelToNote(noteID: ID, label_ID: ID): String
     deleteLabelToNote(noteID: ID, label_ID: ID): String
 
 } 

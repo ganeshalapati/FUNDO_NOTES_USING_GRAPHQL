@@ -52,7 +52,7 @@ const notereslovers={
         return 'notes is deleted sucessfully'
 
         },
-        saveLabelToNote: async (_,params) =>{
+        addLabelToNote: async (_,params) =>{
             //find labelID from noteModel Schema
         var id = await Note.find({ labelID: params.label_ID })
 

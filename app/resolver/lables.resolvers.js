@@ -46,17 +46,7 @@ const labelModel = require('../../models/lable.model')
             
                
         },
-        // AddLabel:async(_,{path},context)=>{
-        //     const checkNote = await labelModel.findOne({noteId: path.noteID})
-        //     if(!checkNote){
-        //         return new Apolloerror.UserInputError('note is not exist ')}
-        //     const checkinglabel = await labelModel.findOne({labelName:path.labelname})
-        //     if(checkinglabel){
-        //         checkinglabel.noteId.push(path.noteID)
-        //         await checkinglabel.save();
-        //         return 'note added succesfully'
-                    
-               
+       
            
         
 
