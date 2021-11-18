@@ -30,6 +30,7 @@ type Reset{
 type Post{
     title:String
     description:String
+    message:String
 }
 type Label{
     labelname:String
@@ -66,7 +67,7 @@ input postInput{
 }
 input LabelInput{
     noteID:ID
-    labelname:String
+    labelName:String
 }
 input addLabelInput{
     noteID:ID
@@ -107,7 +108,10 @@ type Mutation{
     createLabel(path:LabelInput):Label
     deleteLabel(id:ID):Label
     editLabel(path :editLabel):Label
-    AddLabel(path:LabelInput):String
+
+    saveLabelToNote(noteID: ID, label_ID: ID): String
+    deleteLabelToNote(noteID: ID, label_ID: ID): String
+
 } 
 `
 module.exports = typeDefs;

@@ -21,7 +21,7 @@ const notereslovers={
                 userId: post.userId,
                 title: post.title,
                 description: post.description,
-                
+                message:"added"
             })
             const existingUser = await userModel.findOne({ email: post.email });
             if(existingUser){
@@ -52,28 +52,55 @@ const notereslovers={
         return 'notes is deleted sucessfully'
 
         },
-           AddLabel: async (_,{path},context) =>{
-            let userNote = await notesModel.findById({ _id: path.noteId });
-            let userLabel = await labelsModel.findById({ _id: path.labelId });
-            if (userNote.userId != userLabel.userId) {
-                throw new Error('No such label found.');
-            }
-            if (userLabel) {
-                let putlabel = await userNote.updateOne({ label: userLabel });
-                if (putlabel) {
-                    return {
-                        message: 'Label has been added to your note.',
-                        success: true
-                    };
-                } else {
-                    return {
-                        message: 'Note id not found. Unable to put label.',
-                        success: false
-        
-               }   }   }   
-                
+        saveLabelToNote: async (_,params) =>{
+            //find labelID from noteModel Schema
+        var id = await Note.find({ labelID: params.label_ID })
+
+        if (id.length > 0) {
+            return { "message": "This label is not present in notes" }
+        }
+        var note = await Note.findOneAndUpdate({ _id: params.noteID },
+            {
+                $push: {
+                    labelID: params.label_ID
+                }
+
+            })
+
+            return "added"
+
+
+            
+        },
+        deleteLabelToNote: async (_,params) =>{
+            //find labelID from noteModel Schema
+        var id = await Note.find({ labelID: params.label_ID })
+
+        if (!id.length > 0) {
+            return { "message": "This label is not present in notes" }
+        }
+        var note = await Note.findOneAndUpdate({ _id: params.noteID },
+            {
+                $pull: {
+                    labelID: params.label_ID
+                }
+
+            })
+
+            return "deleted"
+
+
             
         }
+            
+
+
+
+        
+                  
+            
+        
+                
         
     }
 

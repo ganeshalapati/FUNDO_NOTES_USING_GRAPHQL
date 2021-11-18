@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
 const NoteSchema = new mongoose.Schema({
     userId:{
-        type:'string'
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"UserData"
     },
-    Label: {
+   
+    labelID: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Label'
-    },
-    email:{
-      type:'string',
-    },
+    }],
+    // email:{
+    //   type:'string',
+    // },
     title:{
         type: 'string',
         required: true,
