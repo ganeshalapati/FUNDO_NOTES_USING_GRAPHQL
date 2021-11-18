@@ -67,7 +67,7 @@ const notereslovers={
 
             })
 
-            return "added"
+            return "added label to the note"
 
 
             
@@ -87,7 +87,7 @@ const notereslovers={
 
             })
 
-            return "deleted"
+            return "deleted label from the note"
 
 
             
