@@ -12,7 +12,6 @@ const notereslovers={
          getnotes: async(_,{id})=>{
             return await Note.findById(id);
        }
-
     },
 
     Mutation:{
@@ -21,7 +20,7 @@ const notereslovers={
                 userId: post.userId,
                 title: post.title,
                 description: post.description,
-                message:"added"
+                //message:"added"
             })
             const existingUser = await userModel.findOne({ email: post.email });
             if(existingUser){
@@ -61,15 +60,13 @@ const notereslovers={
         }
         var note = await Note.findOneAndUpdate({ _id: params.noteID },
             {
-                $push: {
+                $addToSet:{
                     labelID: params.label_ID
                 }
 
             })
 
             return "added label to the note"
-
-
             
         },
         deleteLabelToNote: async (_,params) =>{
