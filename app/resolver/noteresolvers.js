@@ -30,6 +30,8 @@ const notereslovers={
             const notes = new Note({
                 title: post.title,
                 description: post.description,
+                userId: context.id,
+
                 //message:"added"
             })
             const existingUser = await userModel.findOne({ email: post.email });
