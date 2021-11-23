@@ -3,7 +3,7 @@ const { ApolloServer}  =  require('apollo-server-express')
 const dbConfig         =  require('./Config/database.config')
 const Schema           =  require('././app/schema/index')
 const graphqlresolver  =  require('././app/resolver/index')
-//const Auth             =  require('./app/utilities/middelware/auth')
+const auth             =  require('./utilities/auth')
 
 dbConfig.dbConnection();
 
@@ -19,6 +19,7 @@ const apolloserver = new ApolloServer({
 
     typeDefs:Schema,
     resolvers:graphqlresolver,
+    context:auth
    
     //context: Auth
 })

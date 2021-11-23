@@ -11,7 +11,7 @@ type Users{
     password:String
 }
 type Authuser{
-    userId:ID
+    id:ID
     firstName:String
     lastName:String
     email:String

@@ -23,11 +23,11 @@ const notereslovers={
         createnote: async(_,{post},context)=>{
 
             if(!context.id){
+                
                 return new ApolloError.AuthenticationError('UnAuthenticated');
 
             }
             const notes = new Note({
-                userId: post.userId,
                 title: post.title,
                 description: post.description,
                 //message:"added"
