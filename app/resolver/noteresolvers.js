@@ -32,7 +32,7 @@ const notereslovers={
                 description: post.description,
                 userId: context.id,
 
-                //message:"added"
+                
             })
             const existingUser = await userModel.findOne({ email: post.email });
             if(existingUser){

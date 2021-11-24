@@ -20,8 +20,6 @@ const labelModel = require('../../models/lable.model')
 
                 
             });
-
-             
             await labelmodel.save();
             return ({
                 labelName: path.labelName
