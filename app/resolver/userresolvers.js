@@ -75,6 +75,7 @@ const resolvers={
             }
 
             // Token generating
+            
 
             const token =jwt.sign({  email:path.email  },' alapatiganesh31',{
                 expiresIn:'1h'

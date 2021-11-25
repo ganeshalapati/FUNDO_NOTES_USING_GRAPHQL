@@ -4,14 +4,14 @@ const {gql} =require('apollo-server-express')
 const typeDefs = gql`
  
 type Users{
-    id:ID!
+    id:ID
     firstName:String
     lastName:String
     email:String
     password:String
 }
 type Authuser{
-    id:ID!
+    id:ID
     firstName:String
     lastName:String
     email:String
