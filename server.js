@@ -4,6 +4,7 @@ const dbConfig         =  require('./Config/database.config')
 const Schema           =  require('././app/schema/index')
 const graphqlresolver  =  require('././app/resolver/index')
 const auth             =  require('./utilities/auth')
+const redis =require('./config/redis')
 
 dbConfig.dbConnection();
 
