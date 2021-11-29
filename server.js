@@ -13,7 +13,7 @@ require('dotenv').config();
 async function startserver(){ 
      
 const app = express()
-  
+
 //working of graphql 
 
 const apolloserver = new ApolloServer({

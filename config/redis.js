@@ -14,4 +14,15 @@ module.exports = function () {
     client.on('error', function (err) {
         console.log('Something went wrong ' + err);
     });
-};
+}
+mutation:{
+     createnote: async (parent, { key, value }, { client }) => {
+    try {
+      await client.set(key, value);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+}
+}

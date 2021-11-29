@@ -4,6 +4,8 @@ const userModel = require('../../models/usermodel')
 const labelModel = require('../../models/lable.model')
 const checkAuth = require('../../utilities/auth')
 const ApolloError = require('apollo-server-errors')
+const redis = require('../../config/redis')
+const usermodel = require('../../models/usermodel')
 
 
 
@@ -16,11 +18,17 @@ const notereslovers={
          },  
          getnotes: async(_,{id})=>{
             return await Note.findById(id);
-       }
+       },
+       getnotes: async(_,{id})=>{
+        return await client.get(id);
+    },
+    getAllnotes: async ()=>{
+        return await client.getAllnotes()
     },
 
+
     Mutation:{
-        createnote: async(_,{post},context)=>{
+        createnote: async(_,{post},context,client)=>{
 
             if(!context.id){
                 
@@ -34,6 +42,13 @@ const notereslovers={
 
                 
             })
+            const user = await client.set({email:post.email});{
+            if(!user){
+                return 'user id already EXIST'
+            }
+            else
+            return notes
+        }
             const existingUser = await userModel.findOne({ email: post.email });
             if(existingUser){
                 return 'user id already EXIST'
@@ -43,7 +58,7 @@ const notereslovers={
  
          },
 
-         editnote: async(parent,args,context,info)=>{
+         editnote: async(parent,args,context,client)=>{
             if(!context.id){
                 return new ApolloError.AuthenticationError('UnAuthenticated');
 
@@ -129,6 +144,6 @@ const notereslovers={
         
     }
 
- }
-
+}}
+    
 module.exports = notereslovers;
