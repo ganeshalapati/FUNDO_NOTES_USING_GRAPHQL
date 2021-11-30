@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.3.4",
+    "cookie-session": "^1.4.0",
     "dotenv": "^10.0.0",
     "easygraphql-tester": "^6.0.1",
     "eslint": "^8.1.0",
@@ -36,6 +37,8 @@
     "mongoose": "^6.0.7",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.14",
+    "passport": "^0.5.0",
+    "passport-google-oauth20": "^2.0.0",
     "redis": "^4.0.0"
   }
 }

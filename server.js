@@ -1,38 +1,40 @@
-const express          =  require('express');
-const { ApolloServer}  =  require('apollo-server-express')
-const dbConfig         =  require('./Config/database.config')
-const Schema           =  require('././app/schema/index')
-const graphqlresolver  =  require('././app/resolver/index')
-const auth             =  require('./utilities/auth')
-const redis =require('./config/redis')
-
-dbConfig.dbConnection();
+const { ApolloServer } = require('apollo-server-express');
+const graphqlSchema = require('./app/graphql/schema/index');
+const graphqlResolver = require('./app/graphql/resolvers/index');
+const dbConfig = require('./config/database.config');
+const express = require('express');
+const isAuth = require('./app/utilities/middleware/is-auth');
+require('./app/utilities/socialAuthentication/passport-setup')
 
 require('dotenv').config();
 
-async function startserver(){ 
-     
-const app = express()
+//establishing database connection
+dbConfig.dbConnection();
+async function startserver(){
 
-//working of graphql 
+//creating ApolloServer and declaring schemas,resolvers and context in it
+const server = new ApolloServer({
 
-const apolloserver = new ApolloServer({
+  typeDefs: graphqlSchema,
+  resolvers: graphqlResolver,
+  context: isAuth
+});
 
-    typeDefs:Schema,
-    resolvers:graphqlresolver,
-    context:auth
-   
-    //context: Auth
-})
-await apolloserver.start();
-apolloserver.applyMiddleware({app , path:"/graphql"})
+//storing express in app
+const app = express();
 
-// listening to the port 
- 
-app.listen(process.env.PORT,()=>{
+require("./app/routes/googleroutes/google.routes")(app)
 
-    console.log("server is running on PORT 2000")})
+//apply express middlewar
+
+await server.start()
+server.applyMiddleware({ app,path:"/graphql" });
+
+
+
+// listen on port 3000 for incoming requests
+app.listen(process.env.PORT, () => {
+  console.log('Server is listening on port 2000');
+});
 }
-
- 
 startserver()

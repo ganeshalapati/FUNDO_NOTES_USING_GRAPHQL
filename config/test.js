@@ -1,10 +1,14 @@
-// //write a program to add all the whole squares from 1 to 1000 using arrays 
-// function sum(array){
-//     const sum = 0;
-//     i = array.length;
-//     while(i--)
-//     sum = Math.pow(array[i],2);
-//     return sum
-// }
-
-// console.log(sum[])
+function resolveAfter2Seconds() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('resolved');
+      }, 2000);
+    });
+  }
+  
+  async function asyncCall() {
+    console.log('calling');
+    const result = await resolveAfter2Seconds();
+    console.log(result);
+  }
+  asyncCall();
