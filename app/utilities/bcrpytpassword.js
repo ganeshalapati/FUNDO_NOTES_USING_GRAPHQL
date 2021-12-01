@@ -1,11 +1,7 @@
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 class bcryptPassword {
-    /**
-      * @description Used to hash password
-      * @param {*} details
-      * @param {*} callback
-      */
+    
     hashpassword = (details, callback) => {
         try{
         bcrypt.hash(details, saltRounds, function (err, hash) {

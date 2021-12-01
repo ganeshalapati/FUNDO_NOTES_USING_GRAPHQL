@@ -1,9 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-/**
-      * @description Takes the header as req and verifies the token and returns true or false
-      * @param {*} req
-      */
+
 module.exports = ({ req }) => {
     const token = req.headers.authorization || ''
     try {

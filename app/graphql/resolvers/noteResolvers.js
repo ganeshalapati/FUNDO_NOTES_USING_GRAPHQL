@@ -35,6 +35,7 @@ const noteResolvers = {
       try {
         if (!context.id) {
             console.log("error");
+            
           return new ApolloError.AuthenticationError('UnAuthenticated');
         }
         const existingUser = await userModel.findOne({ email: context.email });

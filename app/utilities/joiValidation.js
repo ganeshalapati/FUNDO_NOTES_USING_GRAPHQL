@@ -1,10 +1,7 @@
 const Joi = require('joi');
 class joiValidation {
 
-    /**
- * @description   : validating all parameters we are getting from the user for registration
- * @method        : string, min, required, regex pattern
-*/
+   
     authRegister =
         Joi.object({
             firstName: Joi.string()

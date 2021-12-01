@@ -5,7 +5,7 @@ const dbConfig = require('./config/database.config');
 const express = require('express');
 const isAuth = require('./app/utilities/middleware/is-auth');
 require('./app/utilities/socialAuthentication/passport-setup')
-
+const redis = require('./config/redis');
 require('dotenv').config();
 
 //establishing database connection
