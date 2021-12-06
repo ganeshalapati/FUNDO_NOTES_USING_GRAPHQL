@@ -15,14 +15,38 @@ module.exports = function () {
         console.log('Something went wrong ' + err);
     });
 }
-mutation:{
-     createnote: async (parent, { key, value }, { client }) => {
-    try {
-      await client.set(key, value);
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
-}
-}
+class Redis {
+   
+    redis = (req, res, next) => {
+      client.set("getNotes", (err, redisdata) => {
+        if (err) {
+          throw err;
+        } else if (redisdata) {
+            client.get({ redisData: JSON.parse(redisdata) });
+        } else {
+          next();
+        }
+      });
+    };
+   
+    redisById = (req, res, next) => {
+      const notes = req.params.Id;
+      console.log(notes);
+      client.get(notes, (err, redisdata) => {
+        if (err) {
+          throw err;
+        } else if (redisdata) {
+          res.send({ redisData: JSON.parse(redisdata) });
+        } else {
+          next();
+        }
+      });
+    };
+  
+   
+    clearCache = () => {
+      client.flushall();
+      console.log("Cache is cleared!");
+    };
+  }
+  module.exports = new Redis();

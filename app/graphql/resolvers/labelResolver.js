@@ -13,12 +13,7 @@ const labelResolvers = {
         }
     },
     Mutation: {
-        /**
-     * @description Mutation to create label
-     * @param {*} empty
-     * @param {*} input 
-     * @param {*} context
-     */
+    
         createLabel: async (_, { input }, context) => {
             try {
                 if (!context.id) {

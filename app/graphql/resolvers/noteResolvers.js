@@ -3,7 +3,7 @@ const userModel = require('../../models/user.model');
 const noteModel = require('../../models/note.model');
 const labelModel = require('../../models/label.model');
 const trashModel = require('../../models/trash.model');
-
+const auth = require('../../utilities/middleware/is-auth');
 const noteResolvers = {
   Query: {
 
@@ -31,10 +31,10 @@ const noteResolvers = {
     },
 
     
-    createNote: async (_, { input }, context) => {
+    createNote: async (_, { input }, context,error) => {
       try {
-        if (!context.id) {
-            console.log("error");
+        if (!context._id) {
+          console.log(error);
             
           return new ApolloError.AuthenticationError('UnAuthenticated');
         }

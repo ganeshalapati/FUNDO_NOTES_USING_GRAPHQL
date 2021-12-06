@@ -74,9 +74,9 @@ const userResolvers = {
           return new ApolloError.AuthenticationError('Invalid password', { password: 'Does Not Match' });
         }
         const token = jwt.getToken(userPresent);
-        if (!token) {
-          throw new ApolloError.ApolloError('Internal Server Error');
-        } return {
+       // if (!token) {
+         // throw new ApolloError.ApolloError('Internal Server Error');
+        return {
           _id: userPresent.id,
           token,
           firstName: userPresent.firstName,
@@ -85,6 +85,7 @@ const userResolvers = {
           getNotes: notesPresent
         };
       } catch (error) {
+          console.log(error)
         return new ApolloError.ApolloError('Internal Server Error');
       }
     },
