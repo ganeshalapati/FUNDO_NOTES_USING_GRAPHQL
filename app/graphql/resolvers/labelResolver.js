@@ -3,9 +3,7 @@ const labelModel = require('../../models/label.model');
 
 const labelResolvers = {
     Query: {
-        /**
-    * @description Query to get all labels from labelModel Schema in Database
-    */
+      
 
         getLabel: async () => {
             const labels = await labelModel.find()
@@ -45,12 +43,7 @@ const labelResolvers = {
             }
         },
 
-        /**
-    * @description Mutation to delete a label of a registered user
-    * @param {*} empty
-    * @param {*} input
-    * @param {*} context
-    */
+      
         deleteLabel: async (_, { input }, context) => {
             try {
                 if (!context.id) {
@@ -72,12 +65,7 @@ const labelResolvers = {
             }
         },
 
-        /**
-    * @description Mutation to edit label
-    * @param {*} empty
-    * @param {*} input 
-    * @param {*} context
-    */
+     
         editLabel: async (_, { input }, context) => {
             try {
                 if (!context.id) {
@@ -129,12 +117,7 @@ const labelResolvers = {
             }
         },
 
-        /**
-    * @description Mutation to search a label
-    * @param {*} empty
-    * @param {*} input 
-    * @param {*} context
-    */
+       
         searchLabel: async (_, { input }, context) => {
             try {
                 if (!context.id) {
