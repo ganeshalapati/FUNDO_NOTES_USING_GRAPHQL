@@ -45,12 +45,7 @@ class sendinfobymail {
     }
   }
 
-    /**
-      * @description Used to check if the client mailcode matches with the mailcode
-      * sent to the mailid of the client
-      * @param {*} details
-      * @param {*} user
-      */
+    
   sendCode = (details, user) => {
     if (details === user[0].tempcode) {
       return 'true'

@@ -8,7 +8,7 @@ module.exports = ({ req }) => {
             return req=false;
         }
             let decodedToken;   
-            decodedToken=jwt.verify(token, process.env.JWT_SECRET)       
+            decodedToken=jwt.verify(token, "asdfghjkl")       
             return decodedToken;
         }
     

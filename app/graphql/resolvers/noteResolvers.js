@@ -33,16 +33,16 @@ const noteResolvers = {
     
     createNote: async (_, { input }, context,error) => {
       try {
-        if (!context._id) {
-          console.log(error);
+      //   if (!context.id) {
+      //     console.log(error);
             
-          return new ApolloError.AuthenticationError('UnAuthenticated');
-        }
+      //     return new ApolloError.AuthenticationError('UnAuthenticated');
+      //   }
         const existingUser = await userModel.findOne({ email: context.email });
         const notemodel = new noteModel({
           title: input.title,
           description: input.description,
-          emailId: existingUser.email,
+          //emailId: existingUser.email,
         });
         await notemodel.save();
         return notemodel;
